@@ -7,6 +7,22 @@
     <title>Author Info</title>
 </head>
 <body>
+
+        {{authors.first_name}} {{authors.last_name}}
+        ID: {{authors.id}}
+        Notes: {{authors.notes}}
+        Books: 
+        <ul>
+            {% for book in books %}
+            <li>{{book.title}}</li>   
+            {% endfor %} 
+        </ul>
+        
+        <form action="{{Placeholder}}" method="post">
+                <select name="" id="">
+                    <option value=""></option>
+                </select>
+            </form>
     
 </body>
 </html>

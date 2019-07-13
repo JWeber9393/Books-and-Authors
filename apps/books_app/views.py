@@ -23,3 +23,27 @@ def book_info(request, book_id):
         'authors' : Books.objects.get(id = book_id).authors.all()
     }
     return render(request, "books_app/book_info.html", context)
+
+def authors(request):
+    print("*"*100)
+    print("This is the authors rendering")
+    context = {
+        'authors' : Authors.objects.all()
+    }
+    return render(request, "books_app/authors.html", context)
+
+def add_author(request):
+    print("*"*100)
+    print("processing new author")
+    new_author = Authors.objects.create(first_name = request.POST['fname'], last_name = request.POST['lname'], notes = request.POST['notes'])
+    return redirect('/authors')
+
+
+def author_info(request, author_id):
+    print('*'*100)
+    print("this is the author info page")
+    context = {
+        'authors' : Authors.objects.get(id = author_id),
+        'books' : Authors.objects.get(id = author_id).books.all()
+    }
+    return render(request, "books_app/author_info.html", context)
