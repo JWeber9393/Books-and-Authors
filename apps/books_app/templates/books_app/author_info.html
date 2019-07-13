@@ -18,11 +18,15 @@
             {% endfor %} 
         </ul>
         
-        <form action="{{Placeholder}}" method="post">
-                <select name="" id="">
-                    <option value=""></option>
-                </select>
-            </form>
+        <form action="{{authors.id}}/append_books" method="post">
+            {% csrf_token %}
+            <select name="select_book">
+                {% for book in all_books %}
+                <option value="{{book.id}}">{{book.title}}</option>
+                {% endfor %}
+            </select>
+            <input type="submit" value="Add">
+        </form>
     
 </body>
 </html>

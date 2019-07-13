@@ -20,9 +20,17 @@ def book_info(request, book_id):
     print("this is the book info page")
     context = {
         'books' : Books.objects.get(id = book_id),
-        'authors' : Books.objects.get(id = book_id).authors.all()
+        'authors' : Books.objects.get(id = book_id).authors.all(),
+        'all_authors' : Authors.objects.all(),
     }
     return render(request, "books_app/book_info.html", context)
+
+def append_authors(request, book_id):
+    option = Authors.objects.get(id = request.POST['select_author'])
+    Books.objects.get(id = book_id).authors.add(option)
+    return redirect(f'/book_info/{book_id}')
+
+
 
 def authors(request):
     print("*"*100)
@@ -44,6 +52,14 @@ def author_info(request, author_id):
     print("this is the author info page")
     context = {
         'authors' : Authors.objects.get(id = author_id),
-        'books' : Authors.objects.get(id = author_id).books.all()
+        'books' : Authors.objects.get(id = author_id).books.all(),
+        'all_books' : Books.objects.all(),
     }
     return render(request, "books_app/author_info.html", context)
+
+
+def append_books(request, author_id):
+    option = Books.objects.get(id = request.POST['select_book'])
+    Authors.objects.get(id = author_id).books.add(option)
+    return redirect(f'/author_info/{author_id}')
+
